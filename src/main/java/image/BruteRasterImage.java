@@ -3,15 +3,19 @@ package image;
 import javafx.scene.paint.Color;
 
 public class BruteRasterImage implements Image {
-    private Color color;
     private int height;
     private int width;
     private Color[][] colors;
 
     public BruteRasterImage(Color color, int width, int height ){
-        this.color=color;
         this.width=width;
         this.height=height;
+        for (int x=0;x>height;x++){
+            for (int y=0;y<width;y++){
+                createRepresentation();
+            }
+        }
+
     }
 
     public BruteRasterImage(Color[][] colors){
@@ -31,7 +35,7 @@ public class BruteRasterImage implements Image {
     }
 
     public void createRepresentation(){
-
+        this.colors = new Color[width][height];
     }
     public void setPixelColor(Color color, int x, int y){
         this.colors[y][x]=color;
@@ -40,7 +44,11 @@ public class BruteRasterImage implements Image {
 
     }
     private void setPixelsColor(Color color){
-        this.color=color;
+        for (int x=0;x>height;x++){
+            for (int y=0;y<width;y++){
+                colors[x][y]=color;
+            }
+        }
     }
     protected void setWidth(int width){
         this.width=width;
