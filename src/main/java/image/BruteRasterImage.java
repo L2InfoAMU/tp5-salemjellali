@@ -10,12 +10,12 @@ public class BruteRasterImage implements Image {
     public BruteRasterImage(Color color, int width, int height ){
         this.width=width;
         this.height=height;
-        for (int x=0;x>height;x++){
-            for (int y=0;y<width;y++){
-                createRepresentation();
+        createRepresentation();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                colors[x][y] = color;
             }
         }
-
     }
 
     public BruteRasterImage(Color[][] colors){
@@ -36,6 +36,7 @@ public class BruteRasterImage implements Image {
 
     public void createRepresentation(){
         this.colors = new Color[width][height];
+
     }
     public void setPixelColor(Color color, int x, int y){
         this.colors[y][x]=color;
