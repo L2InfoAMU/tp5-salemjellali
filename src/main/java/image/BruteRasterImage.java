@@ -1,5 +1,5 @@
 package image;
-
+import static util.Matrices.*;
 import javafx.scene.paint.Color;
 
 public class BruteRasterImage implements Image {
@@ -19,6 +19,13 @@ public class BruteRasterImage implements Image {
     }
 
     public BruteRasterImage(Color[][] colors){
+        this.height=getRowCount(colors);
+        this.width=getColumnCount(colors);
+        createRepresentation();
+
+        requiresNonNull(colors);
+        requiresNonZeroDimensions(colors);
+        requiresRectangularMatrix(colors);
         this.colors = colors;
     }
 
