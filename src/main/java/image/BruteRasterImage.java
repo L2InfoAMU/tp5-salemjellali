@@ -19,10 +19,9 @@ public class BruteRasterImage implements Image {
     }
 
     public BruteRasterImage(Color[][] colors){
-        this.height=getRowCount(colors);
-        this.width=getColumnCount(colors);
+        this.width=getRowCount(colors);
+        this.height=getColumnCount(colors);
         createRepresentation();
-
         requiresNonNull(colors);
         requiresNonZeroDimensions(colors);
         requiresRectangularMatrix(colors);
@@ -30,7 +29,7 @@ public class BruteRasterImage implements Image {
     }
 
     public Color getPixelColor(int x, int y) {
-        return colors[y][x];
+        return colors[x][y];
     }
 
     public int getWidth() {
