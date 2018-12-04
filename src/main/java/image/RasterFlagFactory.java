@@ -4,8 +4,8 @@ import javafx.scene.paint.Color;
 
 public class RasterFlagFactory implements ImageFactory {
 
-    private int width;
-    private int height;
+    public int width;
+    public int height;
     private Color leftColor;
     private Color middleColor;
     private Color rightColor;
@@ -26,12 +26,16 @@ public class RasterFlagFactory implements ImageFactory {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                colors[x][y] = (x < width / 3) ? leftColor : ((x > 2 * width/ 3) ? rightColor : middleColor);
+                colors[x][y] =(x < width / 3) ? leftColor : ((x > 2 * width / 3) ? rightColor : middleColor);
             }
         }
         switch (rasterImageType){
             case BRUTE:
                 return new BruteRasterImage(colors);
+            case PALETTE:
+                return new PaletteRasterImage(colors);  
+            case SPARSE:
+                return new SparseRasterImage(colors);    
             default:
                 throw new NotSupportedException(rasterImageType + " is not supported");
         }
