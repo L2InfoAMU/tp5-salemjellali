@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import java.io.LineNumberInputStream;
 import java.util.*;
 
-public class PaletteRasterImage implements Image {
+public class PaletteRasterImage extends RasterImage implements Image {
     public List<Color> Palette;
     public int[][] indexesofcolor;
     public int width;
@@ -15,53 +15,71 @@ public class PaletteRasterImage implements Image {
     public PaletteRasterImage(Color color, int width, int height) {
         this.height = height;
         this.width = width;
-        this.Palette = new ArrayList<Color>();
-        this.indexesofcolor = new int[width][height];
+        createRepresentation();
         Palette.add(color);
+        setPixelsColor(color);
+            }
 
-        for (int i = 0; i < width; i++) {
+    public PaletteRasterImage(Color[][] pixels) {
+
+        this.height =getRowCount(pixels);
+        this.width = getColumnCount(pixels); 
+        createRepresentation();
+        requiresNonNull(pixels);
+        requiresNonZeroDimensions(pixels);
+        requiresRectangularMatrix(pixels);
+        setPixelsColor(pixels);
+       /* for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+            	Palette.add(pixels[j][i]);
+                indexesofcolor[i][j] = Palette.indexOf(pixels[j][i]);
+            }
+        }*/
+    }
+
+    @Override
+    public Color getPixelColor(int x, int y) {
+        return Palette.get(indexesofcolor[x][y]);
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+    public void createRepresentation(){
+    	 this.indexesofcolor = new int[width][height];
+         this.Palette = new ArrayList<Color>();
+    }
+    public void setPixelColor(Color color, int x, int y){
+    	
+    }
+    public void setPixelsColor(Color[][] pixels){
+    	 for (int i = 0; i < width; i++) {
+             for (int j = 0; j < height; j++) {
+             	Palette.add(pixels[j][i]);
+                 indexesofcolor[i][j] = Palette.indexOf(pixels[j][i]);
+             }
+         }
+    }
+    public void setPixelsColor(Color color){
+    	for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 indexesofcolor[i][j] = Palette.indexOf(color);
             }
 
         }
-    }
-
-    public PaletteRasterImage(Color[][] pixels) {
-
-        this.height = getRowCount(pixels);
-        this.width = getColumnCount(pixels);
-        this.indexesofcolor = new int[width][height];
-        this.Palette = new ArrayList<Color>();
-        requiresNonNull(pixels);
-        requiresNonZeroDimensions(pixels);
-        requiresRectangularMatrix(pixels);
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-
-
-                Palette.add(pixels[i][j]);
-                indexesofcolor[i][j] = Palette.indexOf(pixels[i][j]);
-            }
-
-
-        }
 
     }
-
-    @Override
-    public Color getPixelColor(int x, int y) {
-        return null;
+    
+    protected void setWidth(int width){
+    	this.width = width;
     }
-
-    @Override
-    public int getWidth() {
-        return 0;
+    protected void setHeight(int height){ 
+    	this.height = height;
     }
-
-    @Override
-    public int getHeight() {
-        return 0;
-    }
-
 }
