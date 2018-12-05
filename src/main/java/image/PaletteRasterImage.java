@@ -22,19 +22,14 @@ public class PaletteRasterImage extends RasterImage implements Image {
 
     public PaletteRasterImage(Color[][] pixels) {
 
-        this.height =getRowCount(pixels);
-        this.width = getColumnCount(pixels); 
+        this.height =getColumnCount(pixels);
+        this.width = getRowCount(pixels); 
         createRepresentation();
         requiresNonNull(pixels);
         requiresNonZeroDimensions(pixels);
         requiresRectangularMatrix(pixels);
         setPixelsColor(pixels);
-       /* for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-            	Palette.add(pixels[j][i]);
-                indexesofcolor[i][j] = Palette.indexOf(pixels[j][i]);
-            }
-        }*/
+     
     }
 
     @Override
@@ -56,13 +51,15 @@ public class PaletteRasterImage extends RasterImage implements Image {
          this.Palette = new ArrayList<Color>();
     }
     public void setPixelColor(Color color, int x, int y){
-    	
+    	if(!Palette.contains(color))
+    		Palette.add(color);
+    	indexesofcolor[x][y]=Palette.indexOf(color);
     }
     public void setPixelsColor(Color[][] pixels){
     	 for (int i = 0; i < width; i++) {
              for (int j = 0; j < height; j++) {
-             	Palette.add(pixels[j][i]);
-                 indexesofcolor[i][j] = Palette.indexOf(pixels[j][i]);
+             	Palette.add(pixels[i][j]);
+                 indexesofcolor[i][j] = Palette.indexOf(pixels[i][j]);
              }
          }
     }
