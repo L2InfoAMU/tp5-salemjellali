@@ -11,11 +11,11 @@ public class LogoLISFactory implements ImageFactory{
         Color dark = Color.rgb(35,31,32);
         Color greenblue = Color.rgb(113,208,199);
 
-        int[] xCoordinates = {60,  720, 660, 400, 0,   400, 660};
-        int[] yCoordinates = {0,   60,  140, 0,   0,   140, 0};
-        int[] widths =       {140, 140, 140, 60,  200, 60,  200};
-        int[] heights =      {280, 80,  140, 80,  340, 200, 340};
-        Color[] colors = {Color.WHITE, Color.WHITE, Color.WHITE, greenblue, dark, dark, dark};
+        int[] xCoordinates = {0,  40, 350, 350, 550,  600,800,550};
+        int[] yCoordinates = {360, 360, 100, 360,200,   50, 360,360};
+        int[] widths =       {60, 180, 60, 60,  60, 300,  60,260};
+        int[] heights =      {340, 60,  120, 200,  280, 60, 280,80};
+        Color[] colors = {Color.BLACK, Color.BLACK, greenblue, Color.BLACK , Color.BLACK, Color.BLACK,  Color.BLACK, Color.BLACK};
 
         List<Shape> list = new ArrayList<>();
 
